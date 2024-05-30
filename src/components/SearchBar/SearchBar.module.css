@@ -17,7 +17,7 @@
 
 
 .input {
-  width: 360px;
+  width: 250px;
   border: none;
   outline: none;
   background: none;
@@ -33,4 +33,10 @@
   border: none;
   background: none;
   cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .input {
+    width: 320px;
+  }
 }

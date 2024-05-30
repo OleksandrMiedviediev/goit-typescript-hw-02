@@ -1,6 +1,6 @@
 import { RotatingLines } from "react-loader-spinner"
 
-import css from './Loader.module.css'
+import css from './Losder.module.css'
 
 const Loader:React.FC = ()=> {
     return (
