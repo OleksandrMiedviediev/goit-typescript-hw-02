@@ -7,21 +7,31 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn'
 import ImageModal from '../ImageModal/ImageModal'
 
+interface Image {
+  id: number,
+  url: string,
+  urls: {
+    small: string;
+    regular: string;
+},
+  alt_description: string;
+}
+
 export default function App() {
-  const [gallery, setGallery] = useState([]);
-  const [loader, setLoader] = useState(false);
-  const [error, setError] = useState(false);
+  const [gallery, setGallery] = useState<Image[]>([]);
+  const [loader, setLoader] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuery] = useState<string>("");
 
-  const loadMoreButtonRef = useRef(null);
+  const loadMoreButtonRef = useRef<HTMLButtonElement|null>(null);
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<string|null>(null);
 
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
 
-  const handlSearch = async (newQuery) => {
+  const handlSearch = async (newQuery:string) => {
     setQuery(newQuery);
     setPage(1);
     setGallery([]);
@@ -32,15 +42,14 @@ export default function App() {
   }
 
 
-  useEffect(() => {
-    async function getImages() {
+  useEffect(() => { async function getImages() {
       if (query === "") {
         return;
       }
       setError(false)
       try {
         setLoader(true);
-        const data = await fetchImages(query, page);
+        const data:Image[] = await fetchImages(query, page);
         if (data.length === 0) {
           throw new Error("No item..");
       }
@@ -68,7 +77,7 @@ useEffect(() => {
   }
 }, [gallery]);
 
-const openModal = (image) => {
+const openModal = (image:string) => {
   setSelectedImage(image);
   setIsOpen(true);
 }

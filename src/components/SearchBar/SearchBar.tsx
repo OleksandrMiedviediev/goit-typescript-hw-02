@@ -4,7 +4,14 @@ import { IoSearch } from "react-icons/io5";
 
 import toast, { Toaster } from 'react-hot-toast';
 
-export default function SearchBar ({ onSearch })  {
+interface SearchBarProps{
+    onSearch: (qwery: string) => void;
+}
+interface FormValues{
+    qwery: string;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) =>  {
     return (
         <header className={css.header}>
             <Formik
@@ -39,3 +46,4 @@ export default function SearchBar ({ onSearch })  {
     );
 }
 
+export default SearchBar;
